@@ -7,4 +7,6 @@ export default defineNuxtConfig({
     typeCheck: true,
     strict: true,
   },
+  css: ['~/assets/css/main.css'],
+  modules: ['@nuxt/ui'],
 });

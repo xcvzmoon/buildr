@@ -11,12 +11,16 @@
     "typecheck": "nuxt typecheck"
   },
   "dependencies": {
+    "@nuxt/ui": "^4.11.0",
     "nuxt": "^4.5.2",
+    "tailwindcss": "^4.3.3",
     "vue": "^3.5.41",
     "vue-router": "^5.2.0"
   },
   "devDependencies": {
     "@golar/vue": "^0.1.10",
+    "@iconify-json/hugeicons": "^1.2.33",
+    "@iconify-json/lucide": "^1.2.126",
     "@types/node": "catalog:",
     "golar": "^0.1.10",
     "typescript": "catalog:",

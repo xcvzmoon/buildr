@@ -5,6 +5,7 @@
   "type": "module",
   "private": true,
   "scripts": {
+    "release": "node tools/scripts/release.ts",
     "api": "vpr --filter api",
     "web": "vpr --filter web",
     "database": "vpr --filter database",
@@ -12,6 +13,8 @@
   },
   "devDependencies": {
     "@oxlint/plugins": "^1.80.0",
+    "changelogen": "^0.6.2",
+    "valibot": "catalog:",
     "vite": "catalog:",
     "vite-plus": "catalog:"
   },

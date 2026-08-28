@@ -21,6 +21,7 @@
     "@golar/vue": "^0.1.10",
     "@iconify-json/hugeicons": "^1.2.33",
     "@iconify-json/lucide": "^1.2.126",
+    "@nuxt/cli": "4.0.0-alpha.0",
     "@types/node": "catalog:",
     "golar": "^0.1.10",
     "typescript": "catalog:",

@@ -5,7 +5,11 @@
   "scripts": {
     "build": "nitro build",
     "dev": "nitro dev",
-    "preview": "nitro preview"
+    "preview": "nitro preview",
+    "evlog": "@evlog/cli map"
+  },
+  "dependencies": {
+    "evlog": "^2.27.1"
   },
   "devDependencies": {
     "@types/node": "catalog:",

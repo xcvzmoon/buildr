@@ -5,7 +5,8 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "database": "vpr --filter database"
+    "database": "vpr --filter database",
+    "shared": "vpr --filter shared"
   },
   "devDependencies": {
     "@oxlint/plugins": "^1.80.0",

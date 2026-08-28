@@ -2,16 +2,11 @@ import { defineConfig } from 'vite-plus';
 
 export default defineConfig({
   pack: {
-    dts: {
-      tsgo: true,
+    entry: {
+      types: 'src/types/index.ts',
     },
+    dts: true,
+    minify: true,
     exports: true,
   },
-  lint: {
-    options: {
-      typeAware: true,
-      typeCheck: true,
-    },
-  },
-  fmt: {},
 });

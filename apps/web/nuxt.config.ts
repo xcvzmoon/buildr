@@ -1,11 +1,44 @@
 export default defineNuxtConfig({
   compatibilityDate: '2026-08-29',
+  experimental: {
+    typedPages: true,
+  },
   devtools: {
     enabled: true,
   },
   typescript: {
     typeCheck: true,
     strict: true,
+  },
+  app: {
+    head: {
+      title: 'Buildr',
+      charset: 'utf8',
+      viewport: 'width=device-width, initial-scale=1',
+      meta: [
+        {
+          name: 'format-detection',
+          content: 'no',
+        },
+        {
+          name: 'viewport',
+          content: 'width=device-width, initial-scale=1, maximum-scale=1',
+        },
+      ],
+    },
+    pageTransition: {
+      name: 'page',
+      mode: 'out-in',
+    },
+    layoutTransition: {
+      name: 'layout',
+      mode: 'out-in',
+    },
+  },
+  router: {
+    options: {
+      scrollBehaviorType: 'smooth',
+    },
   },
   css: ['~/assets/css/main.css'],
   modules: [

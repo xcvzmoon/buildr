@@ -62,6 +62,9 @@ jobs:
       - name: Build workspace packages
         run: vp run --filter "@buildr/shared..." build
 
+      - name: Run database migrations
+        run: vp run --filter "@buildr/database" migrate
+
       - name: Test
         run: vp test
 

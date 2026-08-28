@@ -21,5 +21,13 @@
     "typescript": "catalog:",
     "vite": "catalog:",
     "vite-plus": "catalog:"
+  },
+  "dependencies": {
+    "@xcvzlabs/env": "catalog:",
+    "drizzle-orm": "catalog:",
+    "drizzle-query-logger": "^1.1.2",
+    "postgres": "^3.4.9",
+    "uuid": "catalog:",
+    "valibot": "catalog:"
   }
 }

@@ -8,5 +8,11 @@ export default defineNuxtConfig({
     strict: true,
   },
   css: ['~/assets/css/main.css'],
-  modules: ['@nuxt/ui'],
+  modules: [
+    '@nuxt/ui',
+    '@vueuse/nuxt',
+    '@pinia/nuxt',
+    '@pinia/colada-nuxt',
+    'pinia-plugin-persistedstate/nuxt',
+  ],
 });

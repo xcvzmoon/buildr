@@ -6,6 +6,7 @@
   "private": true,
   "scripts": {
     "api": "vpr --filter api",
+    "web": "vpr --filter web",
     "database": "vpr --filter database",
     "shared": "vpr --filter shared"
   },

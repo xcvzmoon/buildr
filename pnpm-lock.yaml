@@ -216,6 +216,9 @@ importers:
 
   .:
     devDependencies:
+      '@oxlint/plugins':
+        specifier: ^1.80.0
+        version: 1.80.0
       vite:
         specifier: npm:@voidzero-dev/vite-plus-core@0.2.8
         version: '@voidzero-dev/vite-plus-core@0.2.8(@types/node@26.4.0)(jiti@2.7.0)(typescript@7.0.2)(yaml@2.9.0)'
@@ -556,6 +559,10 @@ packages:
 
   '@oxlint/plugins@1.73.0':
     resolution: {integrity: sha512-OhgMQeMmZA0dcFcX4/priaJZWdFECxiClgq6mRX6aatZEcV9PbKC3P3/v8U1hVjviT1i5U+vR8lAtBV6m4FXAA==}
+    engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
+
+  '@oxlint/plugins@1.80.0':
+    resolution: {integrity: sha512-QRgH1XqQEYNHa4f1vvPQ5fAdNdncHGIUG1ZWLlGIZHky3qwCEeAKYitZNbZMtaXtAQAAFFTOwqUfzESvimqZNA==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
 
   '@polka/url@1.0.0-next.29':
@@ -1516,6 +1523,8 @@ snapshots:
     optional: true
 
   '@oxlint/plugins@1.73.0': {}
+
+  '@oxlint/plugins@1.80.0': {}
 
   '@polka/url@1.0.0-next.29': {}
 

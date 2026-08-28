@@ -1,13 +1,9 @@
 {
   "name": "buildr",
+  "description": "An opinionated monorepo foundation for building modern full-stack TypeScript applications",
   "version": "0.0.0",
-  "private": true,
   "type": "module",
-  "scripts": {
-    "ready": "vp check && vp run -r test && vp run -r build",
-    "dev": "vp run website#dev",
-    "prepare": "vp config"
-  },
+  "private": true,
   "devDependencies": {
     "@oxlint/plugins": "^1.80.0",
     "vite": "catalog:",
@@ -16,7 +12,7 @@
   "devEngines": {
     "packageManager": {
       "name": "pnpm",
-      "version": "11.24.0",
+      "version": "12.0.0",
       "onFail": "download"
     }
   },

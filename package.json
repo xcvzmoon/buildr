@@ -5,6 +5,7 @@
   "type": "module",
   "private": true,
   "scripts": {
+    "api": "vpr --filter api",
     "database": "vpr --filter database",
     "shared": "vpr --filter shared"
   },

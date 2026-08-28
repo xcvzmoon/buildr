@@ -1,0 +1,15 @@
+{
+  "name": "api",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "build": "nitro build",
+    "dev": "nitro dev",
+    "preview": "nitro preview"
+  },
+  "devDependencies": {
+    "@types/node": "catalog:",
+    "nitro": "latest",
+    "typescript": "catalog:"
+  }
+}

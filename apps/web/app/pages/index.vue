@@ -16,7 +16,7 @@
     { no: '06', layer: 'Toolchain', detail: 'Vite+, one CLI for install, dev, check, and test' },
   ];
 
-  const gigetCommand = 'npx giget@latest gh:xcvzmoon/buildr my-app';
+  const gigetCommand = 'vpx giget@latest gh:xcvzmoon/buildr my-app';
   const { copy, copied } = useClipboard({ source: gigetCommand });
 </script>
 

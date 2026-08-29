@@ -165,6 +165,14 @@ export default defineConfig({
       'anti-slop/no-widen-then-assert': 'error',
       'anti-slop/require-safety-comment-for-type-assertion': 'error',
     },
+    overrides: [
+      {
+        files: ['apps/web/**'],
+        rules: {
+          'unicorn/consistent-function-scoping': 'off',
+        },
+      },
+    ],
     options: {
       typeAware: true,
       typeCheck: true,

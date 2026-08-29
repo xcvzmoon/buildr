@@ -1,5 +1,10 @@
+const apiOrigin = process.env.API_ORIGIN ?? 'http://localhost:3000';
+
 export default defineNuxtConfig({
   compatibilityDate: '2026-08-29',
+  devServer: {
+    port: Number(process.env.PORT) || 5173,
+  },
   experimental: {
     typedPages: true,
   },
@@ -40,6 +45,16 @@ export default defineNuxtConfig({
       scrollBehaviorType: 'smooth',
     },
   },
+  routeRules: {
+    '/api/**': {
+      proxy: {
+        to: `${apiOrigin}/api/**`,
+        fetchOptions: {
+          redirect: 'manual',
+        },
+      },
+    },
+  },
   css: ['~/assets/css/main.css'],
   modules: [
     '@nuxt/ui',
@@ -47,5 +62,9 @@ export default defineNuxtConfig({
     '@pinia/nuxt',
     '@pinia/colada-nuxt',
     'pinia-plugin-persistedstate/nuxt',
+    '@nuxtjs/better-auth',
   ],
+  auth: {
+    clientOnly: true,
+  },
 });

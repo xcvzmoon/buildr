@@ -16,13 +16,15 @@
 
 <template>
   <div class="flex min-h-screen items-center justify-center px-4">
-    <UCard class="w-full max-w-sm">
-      <div class="mb-6 space-y-1 text-center">
-        <UIcon
-          name="i-lucide-key-round"
-          class="mx-auto size-8"
-        />
-        <h1 class="text-lg font-semibold">Forgot password</h1>
+    <SpecPanel code="AUTH/RECOVER">
+      <div class="mb-6 space-y-2 text-center">
+        <div class="mx-auto flex size-10 items-center justify-center border border-default">
+          <UIcon
+            name="i-lucide-key-round"
+            class="size-5"
+          />
+        </div>
+        <h1 class="text-lg font-semibold tracking-tight">Forgot password</h1>
         <p class="text-sm text-muted">We'll email you a code to reset your password</p>
       </div>
 
@@ -61,6 +63,7 @@
         <UButton
           type="submit"
           label="Send reset code"
+          color="neutral"
           block
           :loading="
             forgotPasswordForm.isSubmitting || sendVerificationOtp.status.value === 'pending'
@@ -72,6 +75,6 @@
         Remembered your password?
         <ULink to="/signin">Sign in</ULink>
       </p>
-    </UCard>
+    </SpecPanel>
   </div>
 </template>

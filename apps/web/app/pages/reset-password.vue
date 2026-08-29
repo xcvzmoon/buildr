@@ -34,14 +34,16 @@
 
 <template>
   <div class="flex min-h-screen items-center justify-center px-4">
-    <UCard class="w-full max-w-sm">
+    <SpecPanel code="AUTH/RESET">
       <template v-if="succeeded">
-        <div class="space-y-1 text-center">
-          <UIcon
-            name="i-lucide-circle-check"
-            class="mx-auto size-8"
-          />
-          <h1 class="text-lg font-semibold">Password reset</h1>
+        <div class="space-y-2 text-center">
+          <div class="mx-auto flex size-10 items-center justify-center border border-default">
+            <UIcon
+              name="i-lucide-circle-check"
+              class="size-5"
+            />
+          </div>
+          <h1 class="text-lg font-semibold tracking-tight">Password reset</h1>
           <p class="text-sm text-muted">
             Your password has been updated. Sign in with your new password.
           </p>
@@ -58,12 +60,14 @@
       </template>
 
       <template v-else>
-        <div class="mb-6 space-y-1 text-center">
-          <UIcon
-            name="i-lucide-key-round"
-            class="mx-auto size-8"
-          />
-          <h1 class="text-lg font-semibold">Reset password</h1>
+        <div class="mb-6 space-y-2 text-center">
+          <div class="mx-auto flex size-10 items-center justify-center border border-default">
+            <UIcon
+              name="i-lucide-key-round"
+              class="size-5"
+            />
+          </div>
+          <h1 class="text-lg font-semibold tracking-tight">Reset password</h1>
           <p class="text-sm text-muted">Enter the code we emailed you and choose a new password</p>
         </div>
 
@@ -142,6 +146,7 @@
           <UButton
             type="submit"
             label="Reset password"
+            color="neutral"
             block
             :loading="resetPasswordForm.isSubmitting || resetPassword.status.value === 'pending'"
           />
@@ -152,6 +157,6 @@
           <ULink to="/forgot-password">Request a new one</ULink>
         </p>
       </template>
-    </UCard>
+    </SpecPanel>
   </div>
 </template>

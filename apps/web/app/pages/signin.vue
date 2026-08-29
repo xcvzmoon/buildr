@@ -39,13 +39,15 @@
 
 <template>
   <div class="flex min-h-screen items-center justify-center px-4">
-    <UCard class="w-full max-w-sm">
-      <div class="mb-6 space-y-1 text-center">
-        <UIcon
-          name="i-lucide-lock"
-          class="mx-auto size-8"
-        />
-        <h1 class="text-lg font-semibold">Welcome back</h1>
+    <SpecPanel code="AUTH/SIGNIN">
+      <div class="mb-6 space-y-2 text-center">
+        <div class="mx-auto flex size-10 items-center justify-center border border-default">
+          <UIcon
+            name="i-lucide-lock"
+            class="size-5"
+          />
+        </div>
+        <h1 class="text-lg font-semibold tracking-tight">Welcome back</h1>
         <p class="text-sm text-muted">Sign in to your account to continue</p>
       </div>
 
@@ -53,7 +55,6 @@
         label="Continue with Google"
         icon="i-hugeicons-google"
         color="neutral"
-        variant="subtle"
         block
         :loading="signInSocial.status.value === 'pending'"
         @click="onGoogleSignIn"
@@ -127,6 +128,7 @@
         <UButton
           type="submit"
           label="Sign in"
+          color="neutral"
           block
           :loading="signinForm.isSubmitting || signInEmail.status.value === 'pending'"
         />
@@ -136,6 +138,6 @@
         Don't have an account?
         <ULink to="/signup">Sign up</ULink>
       </p>
-    </UCard>
+    </SpecPanel>
   </div>
 </template>

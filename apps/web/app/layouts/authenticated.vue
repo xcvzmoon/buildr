@@ -5,7 +5,7 @@
 <template>
   <div class="min-h-screen">
     <header class="flex items-center justify-between border-b border-default px-6 py-4">
-      <span class="font-semibold">Buildr</span>
+      <span class="text-sm font-semibold tracking-tight">Buildr</span>
 
       <div
         v-if="session"

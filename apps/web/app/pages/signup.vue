@@ -35,14 +35,16 @@
 
 <template>
   <div class="flex min-h-screen items-center justify-center px-4">
-    <UCard class="w-full max-w-sm">
+    <SpecPanel code="AUTH/SIGNUP">
       <template v-if="submitted">
-        <div class="space-y-1 text-center">
-          <UIcon
-            name="i-lucide-mail-check"
-            class="mx-auto size-8"
-          />
-          <h1 class="text-lg font-semibold">Check your email</h1>
+        <div class="space-y-2 text-center">
+          <div class="mx-auto flex size-10 items-center justify-center border border-default">
+            <UIcon
+              name="i-lucide-mail-check"
+              class="size-5"
+            />
+          </div>
+          <h1 class="text-lg font-semibold tracking-tight">Check your email</h1>
           <p class="text-sm text-muted">
             We sent a verification link to your email address. Click it to activate your account.
           </p>
@@ -59,12 +61,14 @@
       </template>
 
       <template v-else>
-        <div class="mb-6 space-y-1 text-center">
-          <UIcon
-            name="i-lucide-user-plus"
-            class="mx-auto size-8"
-          />
-          <h1 class="text-lg font-semibold">Create an account</h1>
+        <div class="mb-6 space-y-2 text-center">
+          <div class="mx-auto flex size-10 items-center justify-center border border-default">
+            <UIcon
+              name="i-lucide-user-plus"
+              class="size-5"
+            />
+          </div>
+          <h1 class="text-lg font-semibold tracking-tight">Create an account</h1>
           <p class="text-sm text-muted">Get started with your new account</p>
         </div>
 
@@ -157,6 +161,7 @@
           <UButton
             type="submit"
             label="Sign up"
+            color="neutral"
             block
             :loading="signupForm.isSubmitting || signUpEmail.status.value === 'pending'"
           />
@@ -167,6 +172,6 @@
           <ULink to="/signin">Sign in</ULink>
         </p>
       </template>
-    </UCard>
+    </SpecPanel>
   </div>
 </template>

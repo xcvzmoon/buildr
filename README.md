@@ -124,6 +124,22 @@ vp run --filter database studio     # open Drizzle Studio
 vp run --filter database check      # verify migrations are consistent with the schema
 ```
 
+## Docker
+
+Multi-stage `Dockerfile`s for `apps/api` and `apps/web`, plus a `docker-compose.yml` that wires them to Postgres and a one-off `migrate` job that applies Drizzle migrations before the API starts.
+
+```bash
+vp run docker:build     # build the api, web, and migrate images
+vp run docker:up        # start postgres, migrate, api, and web
+vp run docker:logs      # follow logs for all services
+vp run docker:migrate   # re-run migrations on demand
+vp run docker:down      # stop and remove the containers
+```
+
+Before the first run, copy the root `.env.example` to `.env` (Postgres credentials and the ports exposed to the host), and copy `apps/api/.env.example` and `apps/web/.env.example` to `.env` in each app, same as local dev — `docker-compose.yml` reads those files directly.
+
+`web`'s image bakes `API_ORIGIN` in at build time (default `http://api:3000`, the compose service name) because `nuxt.config.ts` resolves it while building the SSR proxy rule, not at request time. Both images run as a non-root user and expose a container `HEALTHCHECK`: `apps/api` against `GET /health`, `apps/web` against `GET /`.
+
 ## Conventions
 
 The full set of coding conventions — TypeScript strictness, Valibot at the boundary, no speculative abstractions, Conventional Commits, and more — lives in [`AGENTS.md`](./AGENTS.md) (also read as `CLAUDE.md` by AI coding agents). [`.github/CONTRIBUTING.md`](.github/CONTRIBUTING.md) covers the day-to-day workflow: setup, testing, commit messages, and the pull request process.

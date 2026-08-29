@@ -9,7 +9,12 @@
     "api": "vpr --filter api",
     "web": "vpr --filter web",
     "database": "vpr --filter database",
-    "shared": "vpr --filter shared"
+    "shared": "vpr --filter shared",
+    "docker:build": "docker compose build",
+    "docker:up": "docker compose up -d",
+    "docker:down": "docker compose down",
+    "docker:logs": "docker compose logs -f",
+    "docker:migrate": "docker compose run --rm migrate"
   },
   "devDependencies": {
     "@oxlint/plugins": "^1.80.0",

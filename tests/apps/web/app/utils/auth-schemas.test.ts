@@ -5,7 +5,7 @@ import {
   resetPasswordSchema,
   signinSchema,
   signupSchema,
-} from './auth-schemas.ts';
+} from '../../../../../apps/web/app/utils/auth-schemas.ts';
 
 describe('signinSchema', () => {
   it('accepts a valid email and non-empty password', () => {

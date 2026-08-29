@@ -69,6 +69,13 @@
       "skillPath": "skills/nuxt/SKILL.md",
       "computedHash": "96dbdbfc06bf7045aeb9a463b972d5c0b5679d6dadf196d8ef6b98dc6defed2d"
     },
+    "nuxt-better-auth": {
+      "source": "better-auth.nuxt.dev",
+      "sourceUrl": "https://better-auth.nuxt.dev/",
+      "sourceType": "well-known",
+      "computedHash": "c63291a175f6ed9855ed49555e79bad8c6814116c0b1c6816b6d84cb27323926",
+      "wellKnownDigest": "sha256:d86c6c3ac90f0cdae73504e78503dda4de297f0e3bf05b190fd6e0f99bf4f38f"
+    },
     "review-logging-patterns": {
       "source": "evlog.dev",
       "sourceUrl": "https://www.evlog.dev",

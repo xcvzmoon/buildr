@@ -1,6 +1,17 @@
+import { fileURLToPath } from 'node:url';
 import { defineConfig } from 'vite-plus';
 
 export default defineConfig({
+  resolve: {
+    alias: [
+      {
+        // Mirrors apps/api/tsconfig.json's `~/* -> ./*` mapping so /tests
+        // can import its server modules without duplicating that alias.
+        find: '~',
+        replacement: fileURLToPath(new URL('./apps/api', import.meta.url)),
+      },
+    ],
+  },
   test: {
     passWithNoTests: true,
   },

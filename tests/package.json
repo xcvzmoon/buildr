@@ -1,0 +1,14 @@
+{
+  "name": "@buildr/tests",
+  "type": "module",
+  "private": true,
+  "devDependencies": {
+    "@buildr/database": "workspace:*",
+    "@dymo-api/better-auth": "catalog:",
+    "@types/node": "catalog:",
+    "better-auth": "catalog:",
+    "h3": "2.0.1-rc.22",
+    "typescript": "catalog:",
+    "unemail": "catalog:"
+  }
+}

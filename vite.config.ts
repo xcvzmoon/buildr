@@ -191,6 +191,9 @@ export default defineConfig({
     ignorePatterns: ['**.d.ts', '.agents/**', '.claude/**', 'tools/oxlint/anti-slop/**'],
   },
   run: {
-    cache: true,
+    cache: {
+      tasks: true,
+      scripts: false,
+    },
   },
 });

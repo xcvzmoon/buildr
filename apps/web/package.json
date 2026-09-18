@@ -11,11 +11,11 @@
     "typecheck": "nuxt typecheck"
   },
   "dependencies": {
-    "@formisch/vue": "^1.0.0",
-    "@nuxt/ui": "^4.11.0",
-    "@nuxtjs/better-auth": "^0.2.2",
-    "@pinia/colada": "^1.4.2",
-    "@pinia/colada-nuxt": "1.0.2",
+    "@formisch/vue": "^1.1.0",
+    "@nuxt/ui": "^4.11.1",
+    "@nuxtjs/better-auth": "^0.3.3",
+    "@pinia/colada": "^1.4.4",
+    "@pinia/colada-nuxt": "1.1.0",
     "@pinia/nuxt": "1.0.2",
     "@vueuse/core": "^14.4.0",
     "@vueuse/nuxt": "^14.4.0",
@@ -26,12 +26,12 @@
     "tailwindcss": "^4.3.3",
     "valibot": "catalog:",
     "vue": "^3.5.41",
-    "vue-router": "^5.2.0"
+    "vue-router": "^5.3.1"
   },
   "devDependencies": {
     "@golar/vue": "^0.1.10",
-    "@iconify-json/hugeicons": "^1.2.33",
-    "@iconify-json/lucide": "^1.2.126",
+    "@iconify-json/hugeicons": "^1.2.34",
+    "@iconify-json/lucide": "^1.2.132",
     "@nuxt/cli": "4.0.0-alpha.0",
     "@types/node": "catalog:",
     "golar": "^0.1.10",

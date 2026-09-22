@@ -2,7 +2,7 @@
   import type { SubmitHandler } from '@formisch/vue';
   import { Field, Form, useForm } from '@formisch/vue';
 
-  definePageMeta({ middleware: 'guest' });
+  definePageMeta({ auth: 'guest' });
 
   const signupForm = useForm({ schema: signupSchema });
   const signUpEmail = useSignUp('email');

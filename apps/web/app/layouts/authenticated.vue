@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  const { session, signOut } = await useAuth();
+  const { user, signOut } = useUserSession();
 </script>
 
 <template>
@@ -8,16 +8,17 @@
       <span class="text-sm font-semibold tracking-tight">Buildr</span>
 
       <div
-        v-if="session"
+        v-if="user"
         class="flex items-center gap-3"
       >
-        <span class="text-sm text-muted">{{ session.user.name }}</span>
+        <span class="text-sm text-muted">{{ user.name }}</span>
+
         <UButton
           label="Sign out"
           color="neutral"
           variant="subtle"
           size="sm"
-          @click="signOut"
+          @click="signOut()"
         />
       </div>
     </header>

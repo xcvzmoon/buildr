@@ -1,4 +1,5 @@
 const apiOrigin = process.env.API_ORIGIN ?? 'http://localhost:3000';
+const siteUrl = process.env.NUXT_PUBLIC_SITE_URL ?? 'http://localhost:5173';
 
 export default defineNuxtConfig({
   compatibilityDate: '2026-08-29',
@@ -61,6 +62,11 @@ export default defineNuxtConfig({
       },
     },
   },
+  runtimeConfig: {
+    public: {
+      siteUrl,
+    },
+  },
   css: ['~/assets/css/main.css'],
   modules: [
     '@nuxt/ui',
@@ -72,5 +78,11 @@ export default defineNuxtConfig({
   ],
   auth: {
     clientOnly: true,
+    redirects: {
+      login: '/signin',
+      guest: '/overview',
+      authenticated: '/overview',
+      logout: '/signin',
+    },
   },
 });

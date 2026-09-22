@@ -3,19 +3,19 @@
   import { Field, Form, useForm } from '@formisch/vue';
   import * as v from 'valibot';
 
-  definePageMeta({ middleware: 'guest' });
-
-  const route = useRoute();
+  definePageMeta({
+    auth: 'guest',
+  });
 
   const emailQuerySchema = v.fallback(v.pipe(v.string(), v.email()), '');
 
+  const route = useRoute();
   const resetPasswordForm = useForm({
     schema: resetPasswordSchema,
     initialInput: {
       email: v.parse(emailQuerySchema, route.query.email),
     },
   });
-
   const resetPassword = useAuthClientAction((client) => client.emailOtp.resetPassword);
 
   const succeeded = ref<boolean>(false);
@@ -26,8 +26,8 @@
       otp: output.otp,
       password: output.password,
     });
-    if (resetPassword.error.value) return;
 
+    if (resetPassword.error.value) return;
     succeeded.value = true;
   };
 </script>

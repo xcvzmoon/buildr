@@ -1,5 +1,7 @@
 <script setup lang="ts">
-  definePageMeta({ middleware: 'guest' });
+  definePageMeta({
+    auth: 'guest',
+  });
 
   type StackRow = {
     no: string;

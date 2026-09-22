@@ -3,7 +3,7 @@
   import { Field, Form, useForm } from '@formisch/vue';
   import * as v from 'valibot';
 
-  definePageMeta({ middleware: 'guest' });
+  definePageMeta({ auth: 'guest' });
 
   const route = useRoute();
   const redirectTarget = computed(() =>
@@ -22,7 +22,6 @@
       },
       {
         onSuccess: async () => {
-          await refreshNuxtData(SESSION_CACHE_KEY);
           await navigateTo(redirectTarget.value);
         },
       },
@@ -47,16 +46,17 @@
             class="size-5"
           />
         </div>
+
         <h1 class="text-lg font-semibold tracking-tight">Welcome back</h1>
         <p class="text-sm text-muted">Sign in to your account to continue</p>
       </div>
 
       <UButton
-        label="Continue with Google"
-        icon="i-hugeicons-google"
-        color="neutral"
-        block
         :loading="signInSocial.status.value === 'pending'"
+        color="neutral"
+        icon="i-hugeicons-google"
+        label="Continue with Google"
+        block
         @click="onGoogleSignIn"
       />
 
@@ -76,16 +76,16 @@
           :path="['email']"
         >
           <UFormField
+            :error="field.errors?.[0]"
             label="Email"
             required
-            :error="field.errors?.[0]"
           >
             <UInput
               v-model="field.input"
               v-bind="field.props"
-              type="email"
               placeholder="you@example.com"
               class="w-full"
+              type="email"
             />
           </UFormField>
         </Field>
@@ -96,9 +96,9 @@
           :path="['password']"
         >
           <UFormField
+            :error="field.errors?.[0]"
             label="Password"
             required
-            :error="field.errors?.[0]"
           >
             <template #hint>
               <ULink
@@ -112,25 +112,25 @@
             <UInput
               v-model="field.input"
               v-bind="field.props"
-              type="password"
               class="w-full"
+              type="password"
             />
           </UFormField>
         </Field>
 
         <UAlert
           v-if="signInEmail.error.value"
+          :title="signInEmail.error.value.message"
           color="error"
           variant="subtle"
-          :title="signInEmail.error.value.message"
         />
 
         <UButton
-          type="submit"
-          label="Sign in"
-          color="neutral"
-          block
           :loading="signinForm.isSubmitting || signInEmail.status.value === 'pending'"
+          color="neutral"
+          label="Sign in"
+          type="submit"
+          block
         />
       </Form>
 

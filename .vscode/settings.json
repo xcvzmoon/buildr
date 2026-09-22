@@ -1,9 +1,10 @@
 {
-  "js/ts.experimental.useTsgo": false,
   "npm.scriptRunner": "vp",
+  "js/ts.experimental.useTsgo": false,
+  "js/ts.tsdk.path": "node_modules/typescript/lib",
   "oxc.fmt.configPath": "./vite.config.ts",
-  "oxc.path.oxfmt": "./node_modules/vite-plus/bin/oxfmt",
-  "oxc.path.oxlint": "./node_modules/vite-plus/bin/oxlint",
+  "oxc.disableNestedConfig": true,
+  "oxc.fmt.disableNestedConfig": true,
   "editor.defaultFormatter": "oxc.oxc-vscode",
   "editor.formatOnSave": true,
   "editor.formatOnSaveMode": "file",

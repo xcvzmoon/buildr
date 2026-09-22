@@ -3,20 +3,13 @@ import { defineConfig } from 'vite-plus';
 
 export default defineConfig({
   resolve: {
-    alias: [
-      {
-        // Mirrors apps/api/tsconfig.json's `~/* -> ./*` mapping so /tests
-        // can import its server modules without duplicating that alias.
-        find: '~',
-        replacement: fileURLToPath(new URL('./apps/api', import.meta.url)),
-      },
-    ],
-  },
-  test: {
-    passWithNoTests: true,
+    alias: {
+      '~': fileURLToPath(new URL('./apps/api', import.meta.url)),
+    },
   },
   staged: {
-    '*': 'vp check --fix',
+    '*.{ts,vue,css,json,md,yaml}': 'vp run fmt',
+    '*.{ts,vue}': 'vp run lint',
   },
   fmt: {
     sortImports: {
@@ -41,7 +34,7 @@ export default defineConfig({
     singleQuote: true,
     singleAttributePerLine: true,
     vueIndentScriptAndStyle: true,
-    ignorePatterns: ['.agents/**', '.claude/**', 'tools/oxlint/anti-slop/**'],
+    ignorePatterns: ['CHANGELOG.md', '.agents/**', 'tools/oxlint/anti-slop/**'],
   },
   lint: {
     plugins: ['typescript', 'unicorn', 'import', 'vue', 'oxc'],
@@ -84,6 +77,14 @@ export default defineConfig({
       'typescript/no-misused-promises': 'error',
       'typescript/await-thenable': 'error',
       'typescript/no-unsafe-assignment': 'warn',
+      'typescript/no-unsafe-argument': 'error',
+      'typescript/no-unsafe-call': 'error',
+      'typescript/no-unsafe-member-access': 'error',
+      'typescript/no-unsafe-return': 'error',
+      'typescript/no-implied-eval': 'error',
+      'typescript/only-throw-error': 'error',
+      'typescript/require-array-sort-compare': 'error',
+      'typescript/no-deprecated': 'warn',
       'typescript/require-await': 'warn',
       'typescript/restrict-template-expressions': 'warn',
       'typescript/unbound-method': 'error',
@@ -143,6 +144,14 @@ export default defineConfig({
       'vue/define-emits-declaration': 'warn',
       'vue/next-tick-style': 'warn',
       'vue/component-definition-name-casing': 'warn',
+      'vue/valid-define-props': 'error',
+      'vue/valid-define-emits': 'error',
+      'vue/valid-define-options': 'error',
+      'vue/valid-next-tick': 'error',
+      'vue/no-watch-after-await': 'error',
+      'vue/return-in-computed-property': 'error',
+      'vue/return-in-emits-validator': 'error',
+      'vue/prefer-import-from-vue': 'error',
 
       'unicorn/no-instanceof-array': 'warn',
       'unicorn/no-invalid-fetch-options': 'error',
@@ -160,6 +169,8 @@ export default defineConfig({
       'import/no-mutable-exports': 'warn',
       'import/newline-after-import': 'warn',
 
+      'anti-slop/no-array-filter-map': 'error',
+      'anti-slop/no-reduce-accumulator-copy': 'error',
       'anti-slop/no-chained-type-assertions': 'error',
       'anti-slop/no-conditional-empty-object-spread': 'error',
       'anti-slop/no-known-value-widening': 'error',
@@ -175,6 +186,8 @@ export default defineConfig({
       'anti-slop/no-unsafe-dictionary-type': 'error',
       'anti-slop/no-widen-then-assert': 'error',
       'anti-slop/require-safety-comment-for-type-assertion': 'error',
+
+      'oxc/no-accumulating-spread': 'error',
     },
     overrides: [
       {
@@ -188,7 +201,10 @@ export default defineConfig({
       typeAware: true,
       typeCheck: true,
     },
-    ignorePatterns: ['**.d.ts', '.agents/**', '.claude/**', 'tools/oxlint/anti-slop/**'],
+    ignorePatterns: ['**/*.d.ts', '.agents/**', 'tools/oxlint/anti-slop/**'],
+  },
+  test: {
+    passWithNoTests: true,
   },
   run: {
     cache: {

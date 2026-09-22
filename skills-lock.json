@@ -164,10 +164,11 @@
       "computedHash": "f8341eaf6fbdc604c2c8123a275407acea5a74ad3b0870cdd0ed2a3007e36c12"
     },
     "nuxt-better-auth": {
-      "source": "onmax/nuxt-skills",
-      "sourceType": "github",
-      "skillPath": "skills/nuxt-better-auth/SKILL.md",
-      "computedHash": "c80c2b3e52391859ab8c55f14b1fcb2c15d441a07ba438ac9983ef76a6928559"
+      "source": "better-auth.nuxt.dev",
+      "sourceUrl": "https://better-auth.nuxt.dev/",
+      "sourceType": "well-known",
+      "computedHash": "13130f7361466f3379b96efb16cdd126708c9234aca831565c49473e274e3183",
+      "wellKnownDigest": "sha256:65499f92ab66c5c5a7aa5e0ac260ab990ef19dd9922663930742c8061a9f9a46"
     },
     "nuxt-ui": {
       "source": "onmax/nuxt-skills",

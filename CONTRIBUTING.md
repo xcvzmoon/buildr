@@ -1,4 +1,4 @@
-# Contributing to buildr
+# Contributing to Buildr
 
 Thanks for taking the time to contribute. This document covers how to set up the project, the standards we hold changes to, and how a pull request gets from open to merged.
 
@@ -13,7 +13,7 @@ By participating in this project, you agree to abide by our [Code of Conduct](./
 
 ## Development Setup
 
-buildr is a pnpm workspace managed through [Vite+](https://viteplus.dev) (`vp`). Check `devEngines`/`engines` in `package.json` for the required pnpm and Node versions.
+Buildr is a pnpm workspace managed through [Vite+](https://viteplus.dev) (`vp`). Check `devEngines`/`engines` in `package.json` for the required pnpm and Node versions.
 
 ```bash
 vp install

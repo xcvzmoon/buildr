@@ -11,31 +11,31 @@
     "typecheck": "nuxt typecheck"
   },
   "dependencies": {
-    "@formisch/vue": "^1.1.0",
-    "@nuxt/ui": "^4.11.1",
-    "@nuxtjs/better-auth": "^0.3.3",
-    "@pinia/colada": "^1.4.4",
-    "@pinia/colada-nuxt": "1.1.0",
-    "@pinia/nuxt": "1.0.2",
-    "@vueuse/core": "^14.4.0",
-    "@vueuse/nuxt": "^14.4.0",
+    "@formisch/vue": "catalog:web",
+    "@nuxt/ui": "catalog:web",
+    "@nuxtjs/better-auth": "catalog:web",
+    "@pinia/colada": "catalog:web",
+    "@pinia/colada-nuxt": "catalog:web",
+    "@pinia/nuxt": "catalog:web",
+    "@vueuse/core": "catalog:web",
+    "@vueuse/nuxt": "catalog:web",
     "better-auth": "catalog:",
-    "nuxt": "^4.5.2",
-    "pinia": "^4.0.3",
-    "pinia-plugin-persistedstate": "^4.7.1",
-    "tailwindcss": "^4.3.3",
+    "nuxt": "catalog:web",
+    "pinia": "catalog:web",
+    "pinia-plugin-persistedstate": "catalog:web",
+    "tailwindcss": "catalog:web",
     "valibot": "catalog:",
-    "vue": "^3.5.41",
-    "vue-router": "^5.3.1"
+    "vue": "catalog:web",
+    "vue-router": "catalog:web"
   },
   "devDependencies": {
-    "@golar/vue": "^0.1.10",
-    "@iconify-json/hugeicons": "^1.2.34",
-    "@iconify-json/lucide": "^1.2.132",
-    "@nuxt/cli": "4.0.0-alpha.0",
+    "@golar/vue": "catalog:web",
+    "@iconify-json/hugeicons": "catalog:web",
+    "@iconify-json/lucide": "catalog:web",
+    "@nuxt/cli": "catalog:web",
     "@types/node": "catalog:",
-    "golar": "^0.1.10",
+    "golar": "catalog:web",
     "typescript": "catalog:",
-    "vue-tsc": "^3.3.11"
+    "vue-tsc": "catalog:web"
   }
 }

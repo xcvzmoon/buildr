@@ -18,7 +18,7 @@
   },
   "devDependencies": {
     "@types/node": "catalog:",
-    "drizzle-kit": "1.0.0-rc.5-5935859",
+    "drizzle-kit": "catalog:database",
     "typescript": "catalog:",
     "vite": "catalog:",
     "vite-plus": "catalog:"
@@ -26,8 +26,8 @@
   "dependencies": {
     "@xcvzlabs/env": "catalog:",
     "drizzle-orm": "catalog:",
-    "drizzle-query-logger": "^1.1.2",
-    "postgres": "^3.4.9",
+    "drizzle-query-logger": "catalog:database",
+    "postgres": "catalog:database",
     "uuid": "catalog:",
     "valibot": "catalog:"
   }

@@ -53,14 +53,15 @@ Each app that needs configuration ships a `.env.example` — copy it to `.env` a
 ```
 apps/
   api/          Nitro server — auth, API routes, structured logging (evlog)
+    tests/      API tests
   web/          Nuxt 4 app — pages, auth UI, and the landing page
+    tests/      Web tests
 packages/
   database/     Drizzle schema, migrations, and Postgres client (@buildr/database)
   shared/       Types shared across apps (@buildr/shared)
 tools/
   oxlint/       Custom lint rules, including an "anti-slop" rule set
   scripts/      One-off scripts (e.g. the release script)
-tests/          Cross-workspace test suite (@buildr/tests)
 ```
 
 `server/` inside `apps/api` follows Nitro's convention: `api/` for `/api`-prefixed handlers, `routes/` for unprefixed ones, plus `middleware/`, `plugins/`, `utils/`, and `tasks/` as needed. `apps/web` is a standard Nuxt 4 app (`app/pages`, `app/components`, `app/layouts`, `app/middleware`).

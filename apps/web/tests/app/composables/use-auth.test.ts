@@ -1,4 +1,4 @@
-import type * as UseAuthModule from '../../../../../apps/web/app/composables/useAuth.ts';
+import type * as UseAuthModule from '../../../app/composables/useAuth.ts';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vite-plus/test';
 
 type FetchAuthSessionFn = (url: string, options: Record<string, string>) => object;
@@ -33,7 +33,7 @@ afterEach(() => {
 });
 
 async function importUseAuth(): Promise<typeof UseAuthModule> {
-  return import('../../../../../apps/web/app/composables/useAuth.ts');
+  return import('../../../app/composables/useAuth.ts');
 }
 
 describe('SESSION_CACHE_KEY', () => {

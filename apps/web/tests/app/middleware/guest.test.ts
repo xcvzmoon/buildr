@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vite-plus/test';
-import { redirectPathSchema } from '../../../../../apps/web/app/utils/safe-redirect.ts';
+import { redirectPathSchema } from '../../../app/utils/safe-redirect.ts';
 
 type MiddlewareResult = undefined | { __redirect: string };
 type RouteLike = { fullPath: string; query: Record<string, string> };
@@ -23,11 +23,11 @@ afterEach(() => {
   vi.resetAllMocks();
 });
 
-async function importMiddleware(): Promise<RouteMiddlewareLike> {
-  const mod = await import('../../../../../apps/web/app/middleware/guest.ts');
-  // Same rationale as middleware/auth.test.ts: narrowed to the fields this
-  // middleware actually reads instead of pulling in vue-router's types.
-  return mod.default;
+async function importMiddleware() {
+  const mod = await import('../../../app/middleware/guest.ts');
+  // SAFETY: The test supplies the two route fields used by this middleware.
+  // oxlint-disable-next-line typescript/no-unsafe-type-assertion
+  return mod.default as RouteMiddlewareLike;
 }
 
 describe('guest route middleware', () => {

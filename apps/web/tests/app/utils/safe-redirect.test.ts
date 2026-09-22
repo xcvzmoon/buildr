@@ -1,6 +1,6 @@
 import * as v from 'valibot';
 import { describe, expect, it } from 'vite-plus/test';
-import { redirectPathSchema } from '../../../../../apps/web/app/utils/safe-redirect.ts';
+import { redirectPathSchema } from '../../../app/utils/safe-redirect.ts';
 
 describe('redirectPathSchema', () => {
   const schema = redirectPathSchema('/overview');

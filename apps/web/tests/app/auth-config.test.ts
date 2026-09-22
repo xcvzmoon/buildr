@@ -22,7 +22,7 @@ type ProbedClient = {
  * and base auth client are supposed to add.
  */
 async function buildClient(baseURL: string): Promise<ProbedClient> {
-  const { default: buildClientAuth } = await import('../../../../apps/web/app/auth.config.ts');
+  const { default: buildClientAuth } = await import('../../app/auth.config.ts');
   return buildClientAuth(baseURL);
 }
 

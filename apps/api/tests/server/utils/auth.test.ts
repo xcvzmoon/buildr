@@ -106,7 +106,7 @@ afterEach(() => {
  * lives.
  */
 async function importAuthAndCaptureConfig(): Promise<CapturedAuthConfig> {
-  await import('../../../../../apps/api/server/utils/auth.ts');
+  await import('../../../server/utils/auth.ts');
 
   const config = authMockState.capturedConfig;
   if (!config) throw new Error('betterAuth() was not called by auth.ts');
@@ -115,7 +115,7 @@ async function importAuthAndCaptureConfig(): Promise<CapturedAuthConfig> {
 }
 
 async function importAuthAndCaptureEmailOtpOptions(): Promise<EmailOtpPluginOptions> {
-  await import('../../../../../apps/api/server/utils/auth.ts');
+  await import('../../../server/utils/auth.ts');
 
   const options = emailOTPMock.mock.calls.at(0)?.[0];
   if (!options) throw new Error('emailOTP() was not called by auth.ts');

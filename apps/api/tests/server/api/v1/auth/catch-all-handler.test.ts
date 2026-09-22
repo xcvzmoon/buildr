@@ -1,4 +1,3 @@
-import type { H3Event } from 'h3';
 import { mockEvent } from 'h3';
 import { afterEach, describe, expect, it, vi } from 'vite-plus/test';
 
@@ -13,10 +12,8 @@ afterEach(() => {
   authHandlerMock.mockReset();
 });
 
-type CatchAllHandler = (event: H3Event) => Promise<Response>;
-
-async function importHandler(): Promise<CatchAllHandler> {
-  return (await import('../../../../../../../apps/api/server/api/v1/auth/[...all].ts')).default;
+async function importHandler() {
+  return (await import('../../../../../server/api/v1/auth/[...all].ts')).default;
 }
 
 describe('auth catch-all route', () => {

@@ -10,7 +10,7 @@ vi.mock('better-auth/client/plugins', () => ({ emailOTPClient: emailOTPClientMoc
 
 describe('authClient', () => {
   it('is created with the API v1 auth base path and the email OTP plugin', async () => {
-    await import('../../../../../apps/web/app/utils/auth-client.ts');
+    await import('../../../app/utils/auth-client.ts');
 
     expect(emailOTPClientMock).toHaveBeenCalledOnce();
     expect(createAuthClientMock).toHaveBeenCalledExactlyOnceWith({

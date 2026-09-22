@@ -1,4 +1,3 @@
-import type { H3Event } from 'h3';
 import { mockEvent } from 'h3';
 import { afterEach, describe, expect, it, vi } from 'vite-plus/test';
 
@@ -15,10 +14,8 @@ afterEach(() => {
   getSessionMock.mockReset();
 });
 
-type ServerMiddleware = (event: H3Event) => Promise<void>;
-
-async function importMiddleware(): Promise<ServerMiddleware> {
-  return (await import('../../../../../apps/api/server/middleware/auth.ts')).default;
+async function importMiddleware() {
+  return (await import('../../../server/middleware/auth.ts')).default;
 }
 
 describe('server auth middleware', () => {

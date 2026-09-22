@@ -21,12 +21,11 @@ afterEach(() => {
   vi.resetAllMocks();
 });
 
-async function importMiddleware(): Promise<RouteMiddlewareLike> {
-  const mod = await import('../../../../../apps/web/app/middleware/auth.ts');
-  // Nuxt's real `RouteMiddleware` type pulls in vue-router's route types,
-  // which aren't resolvable outside apps/web's own tsconfig project; this
-  // narrows to the one field (`fullPath`) the middleware actually reads.
-  return mod.default;
+async function importMiddleware() {
+  const mod = await import('../../../app/middleware/auth.ts');
+  // SAFETY: The test supplies the two route fields used by this middleware.
+  // oxlint-disable-next-line typescript/no-unsafe-type-assertion
+  return mod.default as RouteMiddlewareLike;
 }
 
 const route = { fullPath: '/overview' };

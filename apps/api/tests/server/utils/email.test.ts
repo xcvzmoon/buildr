@@ -1,4 +1,4 @@
-import type * as EmailModule from '../../../../../apps/api/server/utils/email.ts';
+import type * as EmailModule from '../../../server/utils/email.ts';
 import { afterEach, describe, expect, it, vi } from 'vite-plus/test';
 import { setValidApiEnv } from '../../support/env-fixture.ts';
 
@@ -6,22 +6,13 @@ type SentEmailMessage = {
   from: string;
   to: string;
   subject: string;
-  handlebars: string;
-  handlebarsVars: Record<string, string>;
+  html: string;
 };
 
 type SendResult = { data?: unknown; error?: unknown };
 
-const {
-  sendMock,
-  useMock,
-  createEmailMock,
-  resendDriverMock,
-  smtpDriverMock,
-  handlebarsRendererMock,
-} = vi.hoisted(() => ({
+const { sendMock, createEmailMock, resendDriverMock, smtpDriverMock } = vi.hoisted(() => ({
   sendMock: vi.fn<(message: SentEmailMessage) => Promise<SendResult>>(),
-  useMock: vi.fn(),
   createEmailMock: vi.fn(),
   resendDriverMock: vi.fn((_options: { apiKey: string }) => ({ type: 'resend' })),
   smtpDriverMock: vi.fn(
@@ -35,22 +26,18 @@ const {
       type: 'smtp',
     }),
   ),
-  handlebarsRendererMock: vi.fn(() => ({ type: 'handlebars-renderer' })),
 }));
 
 vi.mock('unemail', () => ({
   createEmail: createEmailMock,
-  withRender: vi.fn((renderer: { type: string }) => renderer),
 }));
-vi.mock('unemail/driver/resend', () => ({ default: resendDriverMock }));
-vi.mock('unemail/driver/smtp', () => ({ default: smtpDriverMock }));
-vi.mock('unemail/render/handlebars', () => ({ handlebarsRenderer: handlebarsRendererMock }));
+vi.mock('unemail/drivers/resend', () => ({ default: resendDriverMock }));
+vi.mock('unemail/drivers/smtp', () => ({ default: smtpDriverMock }));
 
 afterEach(() => {
   vi.unstubAllEnvs();
   vi.resetModules();
   sendMock.mockReset();
-  useMock.mockReset();
   createEmailMock.mockReset();
   resendDriverMock.mockClear();
   smtpDriverMock.mockClear();
@@ -63,11 +50,10 @@ afterEach(() => {
  * selected for that test's env.
  */
 async function importEmail(): Promise<typeof EmailModule> {
-  const emailHandle = { use: useMock, send: sendMock };
-  useMock.mockReturnValue(emailHandle);
+  const emailHandle = { send: sendMock };
   createEmailMock.mockReturnValue(emailHandle);
 
-  return import('../../../../../apps/api/server/utils/email.ts');
+  return import('../../../server/utils/email.ts');
 }
 
 describe('createDriver (module init)', () => {
@@ -154,14 +140,13 @@ describe('sendVerificationEmail', () => {
         from: 'Buildr <hello@buildr.test>',
         to: 'jane@example.com',
         subject: 'Verify your email address',
-        handlebarsVars: { name: 'Jane Doe', url: 'https://app.buildr.test/verify?token=abc123' },
       }),
     );
 
     const message = sendMock.mock.calls.at(0)?.[0];
     if (!message) throw new Error('email.send() was not called');
-    expect(message.handlebars).toContain('{{name}}');
-    expect(message.handlebars).toContain('{{url}}');
+    expect(message.html).toContain('Jane Doe');
+    expect(message.html).toContain('https://app.buildr.test/verify?token=abc123');
   });
 
   it('throws the driver error instead of swallowing it', async () => {
@@ -193,7 +178,6 @@ describe('sendPasswordResetOtpEmail', () => {
         from: 'Buildr <hello@buildr.test>',
         to: 'jane@example.com',
         subject: 'Reset your password',
-        handlebarsVars: { otp: '482913' },
       }),
     );
   });

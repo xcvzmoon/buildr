@@ -1,5 +1,5 @@
 <!--
-Thank you for contributing to buildr!
+Thank you for contributing to Buildr!
 
 Please make sure your PR title follows Conventional Commits, e.g.:
   feat: add project switcher
@@ -35,8 +35,12 @@ Please make sure your PR title follows Conventional Commits, e.g.:
 ## Checklist
 
 - [ ] My PR title follows the [Conventional Commits](https://www.conventionalcommits.org/) specification.
-- [ ] I have run `vp check` (fmt, lint, typecheck) and it passes.
-- [ ] I have run `vp test` and all tests pass.
+- [ ] `vp run fmt` completes successfully.
+- [ ] `vp run lint` completes successfully.
+- [ ] `vp run check` completes successfully.
+- [ ] `vp run typecheck` completes successfully.
+- [ ] `vp run test` completes with all tests passing.
+- [ ] `vp run build` completes successfully.
 - [ ] I have added or updated tests that cover my changes, where applicable.
 - [ ] I have updated documentation, where applicable.
 - [ ] My changes generate no new warnings or errors.

@@ -5,6 +5,9 @@
   "type": "module",
   "private": true,
   "scripts": {
+    "fmt": "vp fmt",
+    "lint": "vp lint",
+    "check": "vp check",
     "release": "node tools/scripts/release.ts",
     "api": "vpr --filter api",
     "web": "vpr --filter web",

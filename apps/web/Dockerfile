@@ -1,29 +1,29 @@
-# syntax=docker/dockerfile:1
+# syntax=docker/dockerfile:1.7
 
-FROM node:22-bookworm-slim AS base
-ENV PNPM_HOME="/pnpm"
-ENV PATH="$PNPM_HOME:$PATH"
-RUN corepack enable && \
-    corepack prepare pnpm@12.0.0 --activate && \
+FROM node:26-bookworm-slim AS base
+ENV PNPM_HOME=/pnpm \
+    PATH=/pnpm:$PATH
+RUN npm install --global pnpm@12.5.1 && \
     pnpm config set store-dir /pnpm/store
 WORKDIR /repo
 
-FROM base AS deps
+FROM base AS dependencies
 COPY package.json pnpm-workspace.yaml pnpm-lock.yaml tsconfig.json ./
 COPY apps/api/package.json apps/api/package.json
 COPY apps/web/package.json apps/web/package.json
 COPY packages/database/package.json packages/database/package.json
 COPY packages/shared/package.json packages/shared/package.json
-RUN --mount=type=cache,id=pnpm-store,target=/pnpm/store \
-    pnpm install --frozen-lockfile --filter "web..."
+RUN --mount=type=cache,id=buildr-pnpm-store,target=/pnpm/store,sharing=locked \
+    pnpm install --frozen-lockfile --filter 'web...'
 
-FROM deps AS build
+FROM dependencies AS build
 ARG API_ORIGIN=http://api:3000
 ENV API_ORIGIN=${API_ORIGIN}
 COPY apps/web apps/web
-RUN rm -rf apps/web/.nuxt && pnpm --filter web run build
+RUN pnpm --filter web exec nuxt prepare && \
+    pnpm --filter web run build
 
-FROM node:22-alpine AS runtime
+FROM node:26-alpine AS runtime
 RUN apk add --no-cache dumb-init
 ENV NODE_ENV=production
 ENV PORT=5173

@@ -35,9 +35,11 @@ services:
     build:
       context: .
       dockerfile: apps/api/Dockerfile
+      target: runtime
     restart: unless-stopped
     env_file:
-      - apps/api/.env
+      - path: apps/api/.env
+        required: false
     environment:
       PORT: 3000
       DB_URL: postgres://${POSTGRES_USER:-buildr}:${POSTGRES_PASSWORD:-buildr}@postgres:5432/${POSTGRES_DB:-buildr}
@@ -55,14 +57,16 @@ services:
     build:
       context: .
       dockerfile: apps/web/Dockerfile
+      target: runtime
       args:
-        API_ORIGIN: http://api:3000
+        API_ORIGIN: ${API_ORIGIN:-http://api:3000}
     restart: unless-stopped
     env_file:
-      - apps/web/.env
+      - path: apps/web/.env
+        required: false
     environment:
       PORT: 5173
-      API_ORIGIN: http://api:3000
+      API_ORIGIN: ${API_ORIGIN:-http://api:3000}
     ports:
       - '${WEB_PORT:-5173}:5173'
     depends_on:

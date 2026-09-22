@@ -19,8 +19,7 @@
 **/.env.*
 !**/.env.example
 
-tests/**
-!tests/package.json
+**/tests/**
 
 *.log
 .DS_Store

@@ -3,7 +3,7 @@ packages:
   - packages/*
   - tools/*
 
-catalogMode: manual
+catalogMode: strict
 
 catalog:
   '@dymo-api/better-auth': ^1.2.33

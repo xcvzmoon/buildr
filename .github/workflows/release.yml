@@ -42,7 +42,7 @@ jobs:
           vp run check
           vp run typecheck
           vp run test
-          vp run -r build
+          vp run build
 
       - name: Create or sync release
         env:

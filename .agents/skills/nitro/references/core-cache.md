@@ -14,12 +14,16 @@ Nitro's cache layer (powered by [ocache](https://github.com/unjs/ocache)) builds
 ```ts [routes/cached.ts]
 import { defineCachedHandler } from "nitro/cache";
 
-export default defineCachedHandler((event) => {
-  return "I am cached for an hour";
-}, { maxAge: 60 * 60 });
+export default defineCachedHandler(
+  (event) => {
+    return "I am cached for an hour";
+  },
+  { maxAge: 60 * 60 },
+);
 ```
 
 Behavior:
+
 - Only `GET`/`HEAD` are cached; other methods bypass and call the handler.
 - Auto-manages `etag`, `last-modified`, and `cache-control` headers, plus `304 Not Modified` for conditional requests.
 - Concurrent requests for the same key are deduplicated (handler runs once).
@@ -34,14 +38,17 @@ Cache any async function (e.g. an upstream API call) and reuse it across handler
 import { defineHandler, type H3Event } from "nitro";
 import { defineCachedFunction } from "nitro/cache";
 
-const cachedGHStars = defineCachedFunction(async (repo: string) => {
-  const data = await fetch(`https://api.github.com/repos/${repo}`).then((r) => r.json());
-  return data.stargazers_count;
-}, {
-  maxAge: 60 * 60,
-  name: "ghStars",
-  getKey: (repo: string) => repo,
-});
+const cachedGHStars = defineCachedFunction(
+  async (repo: string) => {
+    const data = await fetch(`https://api.github.com/repos/${repo}`).then((r) => r.json());
+    return data.stargazers_count;
+  },
+  {
+    maxAge: 60 * 60,
+    name: "ghStars",
+    getKey: (repo: string) => repo,
+  },
+);
 
 export default defineHandler(async (event) => {
   const { repo } = event.context.params!;
@@ -64,10 +71,10 @@ import { defineConfig } from "nitro";
 export default defineConfig({
   storage: { redis: { driver: "redis", url: "redis://localhost:6379" } },
   routeRules: {
-    "/blog/**": { swr: true },                       // SWR, default maxAge
-    "/api/**": { swr: 3600 },                        // SWR, 1h
+    "/blog/**": { swr: true }, // SWR, default maxAge
+    "/api/**": { swr: 3600 }, // SWR, 1h
     "/heavy/**": { cache: { maxAge: 3600, base: "redis" } }, // custom mountpoint
-    "/api/realtime/**": { cache: false },            // disable
+    "/api/realtime/**": { cache: false }, // disable
   },
 });
 ```
@@ -78,18 +85,18 @@ Route-rule handlers use the group `nitro/route-rules`.
 
 Shared (`defineCachedHandler` + `defineCachedFunction`):
 
-| Option | Default | Description |
-|---|---|---|
-| `maxAge` | `1` | Seconds the cache is valid. |
-| `swr` | `true` | Serve stale while revalidating in background. |
-| `staleMaxAge` | `0` | Extra seconds a stale value is served. `-1` keeps serving stale during refresh. |
-| `base` | `cache` | Storage mountpoint. |
-| `name` | inferred | Cache namespace. |
-| `group` | `nitro/handlers` / `nitro/functions` | Key group. |
-| `getKey(...args)` | hash | Compute cache key. |
-| `integrity` | code hash | Invalidate when changed. |
-| `shouldInvalidateCache` / `shouldBypassCache` | — | Per-call predicates. |
-| `onError(err)` | log | Custom error handling. |
+| Option                                        | Default                              | Description                                                                     |
+| --------------------------------------------- | ------------------------------------ | ------------------------------------------------------------------------------- |
+| `maxAge`                                      | `1`                                  | Seconds the cache is valid.                                                     |
+| `swr`                                         | `true`                               | Serve stale while revalidating in background.                                   |
+| `staleMaxAge`                                 | `0`                                  | Extra seconds a stale value is served. `-1` keeps serving stale during refresh. |
+| `base`                                        | `cache`                              | Storage mountpoint.                                                             |
+| `name`                                        | inferred                             | Cache namespace.                                                                |
+| `group`                                       | `nitro/handlers` / `nitro/functions` | Key group.                                                                      |
+| `getKey(...args)`                             | hash                                 | Compute cache key.                                                              |
+| `integrity`                                   | code hash                            | Invalidate when changed.                                                        |
+| `shouldInvalidateCache` / `shouldBypassCache` | —                                    | Per-call predicates.                                                            |
+| `onError(err)`                                | log                                  | Custom error handling.                                                          |
 
 Handler-only: `varies` (header names to include in the key / keep on request), `headersOnly` (only do conditional-request handling). Function-only: `transform(entry, ...args)`, `validate(entry, ...args)`.
 
@@ -99,8 +106,8 @@ Key pattern: `` `${base}:${group}:${name}:${getKey(...args)}.json` ``.
 
 ```ts
 // Every cached function exposes .invalidate()
-await cachedGHStars("unjs/nitro");             // populate
-await cachedGHStars.invalidate("unjs/nitro");  // remove
+await cachedGHStars("unjs/nitro"); // populate
+await cachedGHStars.invalidate("unjs/nitro"); // remove
 
 // Or invalidate from anywhere with matching options
 import { invalidateCache } from "ocache";

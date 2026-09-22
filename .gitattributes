@@ -1,3 +1,2 @@
+* text=auto eol=lf
 .agents/** linguist-vendored
-.claude/** linguist-vendored
-.pi/** linguist-vendored

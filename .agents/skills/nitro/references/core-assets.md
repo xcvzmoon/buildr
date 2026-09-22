@@ -28,9 +28,9 @@ import { defineConfig } from "nitro";
 export default defineConfig({
   publicAssets: [
     {
-      baseURL: "build",       // served under /build/
-      dir: "public/build",    // source on disk
-      maxAge: 3600,           // Cache-Control: public, max-age=3600, immutable
+      baseURL: "build", // served under /build/
+      dir: "public/build", // source on disk
+      maxAge: 3600, // Cache-Control: public, max-age=3600, immutable
     },
   ],
 });
@@ -79,9 +79,7 @@ export default defineHandler(async () => {
 import { defineConfig } from "nitro";
 
 export default defineConfig({
-  serverAssets: [
-    { baseName: "templates", dir: "./templates" },
-  ],
+  serverAssets: [{ baseName: "templates", dir: "./templates" }],
 });
 ```
 

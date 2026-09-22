@@ -20,13 +20,13 @@ export default defineHandler((event) => {
 `defineHandler` gives type inference. A plain `(event) => ...` function also works. The `event` is web-standard based:
 
 ```ts
-event.req            // web Request
-event.res            // response init (headers, status)
-event.url            // URL object (event.url.pathname, event.url.searchParams)
-event.path           // request path
-event.method         // HTTP method
-event.context        // mutable per-request context (params, custom data)
-event.context.params // route params
+event.req; // web Request
+event.res; // response init (headers, status)
+event.url; // URL object (event.url.pathname, event.url.searchParams)
+event.path; // request path
+event.method; // HTTP method
+event.context; // mutable per-request context (params, custom data)
+event.context.params; // route params
 ```
 
 Read the body with native `Request` methods (H3 v2 dropped `readBody`):
@@ -100,9 +100,7 @@ Control execution order with numeric prefixes (`01.logger.ts`, `02.auth.ts` — 
 
 ```ts [nitro.config.ts]
 export default defineConfig({
-  handlers: [
-    { route: "/api/**", handler: "./middleware/api-auth.ts", middleware: true },
-  ],
+  handlers: [{ route: "/api/**", handler: "./middleware/api-auth.ts", middleware: true }],
 });
 ```
 
@@ -116,9 +114,7 @@ export default defineConfig({
     "/api/hello": "./routes/api/hello.ts",
     "/api/custom": { handler: "./routes/custom.ts", method: "POST", lazy: true },
   },
-  handlers: [
-    { route: "/blog/**", handler: "./handlers/blog.ts", method: "get" },
-  ],
+  handlers: [{ route: "/blog/**", handler: "./handlers/blog.ts", method: "get" }],
 });
 ```
 
@@ -151,19 +147,19 @@ import { defineConfig } from "nitro";
 
 export default defineConfig({
   routeRules: {
-    "/blog/**": { swr: true },                  // stale-while-revalidate (cache)
-    "/blog/posts/**": { swr: 600 },             // swr with maxAge seconds
-    "/api/data/**": { cache: { maxAge: 60 } },  // full cache options
-    "/api/realtime/**": { cache: false },       // disable caching
+    "/blog/**": { swr: true }, // stale-while-revalidate (cache)
+    "/blog/posts/**": { swr: 600 }, // swr with maxAge seconds
+    "/api/data/**": { cache: { maxAge: 60 } }, // full cache options
+    "/api/realtime/**": { cache: false }, // disable caching
     "/assets/**": { headers: { "cache-control": "s-maxage=0" } },
     "/api/v1/**": { cors: true, headers: { "access-control-allow-methods": "GET" } },
-    "/old-page": { redirect: "/new-page" },     // 307 by default
+    "/old-page": { redirect: "/new-page" }, // 307 by default
     "/legacy": { redirect: { to: "https://example.com/", status: 308 } },
     "/old-blog/**": { redirect: "https://blog.example.com/**" }, // wildcard preserves suffix
     "/proxy/**": { proxy: "https://api.example.com/**" },
     "/admin/**": { basicAuth: { username: "admin", password: "secret" } },
     "/about": { prerender: true },
-    "/isr/**": { isr: 60 },                      // Vercel ISR
+    "/isr/**": { isr: 60 }, // Vercel ISR
   },
 });
 ```

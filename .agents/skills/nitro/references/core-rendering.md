@@ -73,7 +73,7 @@ export default defineConfig({
   renderer: {
     template: "./index.html", // HTML template
     handler: "./renderer.ts", // OR a custom handler (template ignored if set)
-    static: false,            // serve template as-is, skip processing
+    static: false, // serve template as-is, skip processing
   },
 });
 ```
@@ -89,10 +89,9 @@ If an `index.html` exists, Nitro serves it for all unmatched routes — the defa
 ```ts [renderer.ts]
 export default function renderer({ req }: { req: Request }) {
   const url = new URL(req.url);
-  return new Response(
-    `<!DOCTYPE html><html><body><h1>${url.pathname}</h1></body></html>`,
-    { headers: { "content-type": "text/html; charset=utf-8" } },
-  );
+  return new Response(`<!DOCTYPE html><html><body><h1>${url.pathname}</h1></body></html>`, {
+    headers: { "content-type": "text/html; charset=utf-8" },
+  });
 }
 ```
 
@@ -102,7 +101,9 @@ HTML templates support the [rendu](https://github.com/h3js/rendu) preprocessor:
 
 ```html [index.html]
 <h1>Hello {{ $URL.pathname }}</h1>
-<? if ($METHOD === "POST") { ?><p>Submitted!</p><? } ?>
+<? if ($METHOD === "POST") { ?>
+<p>Submitted!</p>
+<? } ?>
 <script server>
   const data = await fetch("https://api.example.com/data").then((r) => r.json());
 </script>

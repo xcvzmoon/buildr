@@ -1,4 +1,4 @@
-<!-- VITE PLUS START -->
+<!--VITE PLUS START-->
 
 # Using Vite+, the Unified Toolchain for the Web
 
@@ -24,9 +24,9 @@ release. Add a tool name to select part of the graph. For example, run
 - [ ] Check if there are `vite.config.ts` tasks or `package.json` scripts necessary for validation, run via `vp run <script>`.
 - [ ] If setup, runtime, or package-manager behavior looks wrong, run `vp env doctor` and include its output when asking for help.
 
-<!-- VITE PLUS END -->
+<!--VITE PLUS END-->
 
-<!-- NITRO START -->
+<!--NITRO START-->
 
 This project is based on [Nitro v3](https://nitro.build), [h3](https://h3.dev/), and [Rolldown](https://rolldown.rs/).
 
@@ -40,7 +40,49 @@ Refer to `node_modules/nitro/dist/docs/README.md` when working on server (your k
 
 - Path alias `~/*` (tsconfig), use explicit `.ts` extensions
 
-<!-- NITRO END -->
+<!--NITRO END-->
+
+## Stack
+
+- Monorepo workspaces: `apps/*`, `packages/*`, `tools/*`
+- `apps/web`: Nuxt **4** (stable `nuxt@^4.5.2`), Vue 3, Vue Router 5, TypeScript **6** (pinned for golar/oxlint — do not bump manually)
+- `apps/api`: Nitro v3 + h3 + Rolldown
+- Toolchain: **Vite+** (`vp` / `vp run`). Underlying package manager is recorded in `package.json` `devEngines` (do not invoke it directly).
+- Lint/format: **oxlint + oxfmt** via Vite+ (`vite.config.ts` is the source of truth). Type-aware lint is on. Not ESLint/Prettier.
+
+Run `vp install` before the first typecheck.
+
+**Verification order:** `vp run check` → `vp run typecheck` → `vp run test` → `vp run build`. Run that sequence before calling work done.
+
+Do not treat `tools/oxlint/anti-slop/**` or `.agents/**` as something to refactor for product features. oxfmt/oxlint intentionally ignore both.
+
+## Git Hooks
+
+Vite+ git hooks replace lefthook. Dispatcher is installed via `prepare` → `vp config` / `vp hooks enable`.
+
+- **pre-commit** (`.vite-hooks/pre-commit`): unstages force-added gitignored files, runs `vp staged` (`staged` rules in `vite.config.ts`), then re-adds those files with `git add -f`. Gitignored staged files are intentionally not format/linted by the hook.
+- **pre-push** (`.vite-hooks/pre-push`): `vp run check` → `vp run typecheck` → `vp run test`
+
+Check status with `vp hooks status`. Per-commit skip: `VP_GIT_HOOKS=0 git commit`. Do not bypass with `--no-verify`.
+
+## Style And Type Rules
+
+oxfmt: single quotes; import order is type-imports → builtins/externals → internal → relative.
+
+oxlint is type-aware (`typeAware` / `typeCheck`) and includes the local **anti-slop** plugin. Failures here are common when writing "helpful" generic helpers:
+
+- No `as` / type assertions without a preceding `SAFETY:` comment (const assertions are fine).
+- No broad `object` / `unknown` as parameter, return, or type-alias types. Use named types; parse external input at the boundary. (Prefer `unknown` over `any` only for values you will narrow — not as a bare function input type.)
+- No `filter().map()` chains — use one loop. No `reduce` that just copies into a new object/array.
+- No bag options / object parameters when discrete arguments fit.
+- No `Reflect.apply`, `Reflect.get`, runtime `typeof` for type-level decisions, or chained assertions.
+- No module mocking in tests (`anti-slop/no-module-mocking`).
+- No accumulating array/object spread in loops (`oxc/no-accumulating-spread`).
+- `no-console`: only `warn` / `error` / `info`.
+- Unused vars/args: prefix with `_`.
+- `no-non-null-assertion` is a warning — avoid `!`.
+
+Vue: Composition API + `<script setup>` is the project direction (see `.agents/skills/vue-*` when loaded).
 
 ## Code conventions
 
@@ -92,6 +134,10 @@ Refer to `node_modules/nitro/dist/docs/README.md` when working on server (your k
 - Catch infrastructure errors where graceful degradation is expected.
 - Clean up temporary resources in `finally` blocks.
 - Include stable error codes in config validation and app-level failures.
+
+## Skills
+
+Project skills live in `.agents/skills/` and are tracked in `skills-lock.json`. They are vendored agent instructions, not product code. Use relevant skills when loaded (for example `/unslop`, `/vue-best-practices`, `/nitro`, `/valibot`). Do not rewrite skill folders as part of product features.
 
 ## Agents
 

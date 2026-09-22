@@ -204,9 +204,7 @@ export default function LoginScreen() {
         )}
       </Field>
       <Field of={loginForm} path={["password"]}>
-        {(field) => (
-          <TextInput {...field.props} value={field.input} secureTextEntry />
-        )}
+        {(field) => <TextInput {...field.props} value={field.input} secureTextEntry />}
       </Field>
       <Button title="Login" onPress={submitForm} />
     </View>
@@ -543,12 +541,7 @@ Form-level `form.errors` and `getErrors(form)` contain only root-level errors. U
 ### Reading Dirty State
 
 ```ts
-import {
-  getDirtyInput,
-  getDirtyPaths,
-  isDirty,
-  pickDirty,
-} from "@formisch/react";
+import { getDirtyInput, getDirtyPaths, isDirty, pickDirty } from "@formisch/react";
 
 // Raw dirty form input, or undefined when nothing is dirty
 const dirtyInput = getDirtyInput(form);
@@ -661,16 +654,7 @@ const TodoSchema = v.object({
 ### React Example
 
 ```tsx
-import {
-  Field,
-  FieldArray,
-  Form,
-  useForm,
-  insert,
-  remove,
-  move,
-  swap,
-} from "@formisch/react";
+import { Field, FieldArray, Form, useForm, insert, remove, move, swap } from "@formisch/react";
 
 export default function TodoPage() {
   const todoForm = useForm({
@@ -693,20 +677,14 @@ export default function TodoPage() {
             {fieldArray.items.map((item, index) => (
               <div key={item}>
                 <Field of={todoForm} path={["todos", index, "label"]}>
-                  {(field) => (
-                    <input {...field.props} value={field.input} type="text" />
-                  )}
+                  {(field) => <input {...field.props} value={field.input} type="text" />}
                 </Field>
                 <Field of={todoForm} path={["todos", index, "deadline"]}>
-                  {(field) => (
-                    <input {...field.props} value={field.input} type="date" />
-                  )}
+                  {(field) => <input {...field.props} value={field.input} type="date" />}
                 </Field>
                 <button
                   type="button"
-                  onClick={() =>
-                    remove(todoForm, { path: ["todos"], at: index })
-                  }
+                  onClick={() => remove(todoForm, { path: ["todos"], at: index })}
                 >
                   Delete
                 </button>
@@ -1003,12 +981,7 @@ When using component libraries that don't expose their underlying native element
 import { DatePicker } from "some-component-library";
 
 <Field of={form} path={["date"]}>
-  {(field) => (
-    <DatePicker
-      value={field.input}
-      onChange={(newDate) => field.onChange(newDate)}
-    />
-  )}
+  {(field) => <DatePicker value={field.input} onChange={(newDate) => field.onChange(newDate)} />}
 </Field>;
 ```
 
@@ -1094,9 +1067,7 @@ reset(form, {
 ```tsx
 <Form of={form} onSubmit={handleSubmit}>
   <Field of={form} path={["hasAccount"]}>
-    {(field) => (
-      <input {...field.props} type="checkbox" checked={field.input} />
-    )}
+    {(field) => <input {...field.props} type="checkbox" checked={field.input} />}
   </Field>
   {getInput(form, { path: ["hasAccount"] }) && (
     <Field of={form} path={["accountId"]}>

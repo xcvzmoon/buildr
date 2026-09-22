@@ -112,6 +112,22 @@ A Git hook runs `vp check --fix` on staged files at commit time (configured in `
 
 Any workspace's own scripts can be run the same way, by filtering to its name: `vp run --filter <name> <script>`.
 
+### Releases
+
+Releases use `genbumppush`. Preview the detected version, changelog, commit, and tag without changing the repository:
+
+```bash
+vp run release -- --dry-run --yes
+```
+
+When the preview is correct, run the release from a clean, up-to-date branch:
+
+```bash
+vp run release -- --yes
+```
+
+The release hook runs `vp check` and `vp test` before changing version files. `genbumppush` then updates `package.json` and `CHANGELOG.md`, commits the release, creates the annotated `v<version>` tag, and pushes the branch and tag atomically. The tag-triggered GitHub Actions workflow creates the GitHub release.
+
 ### Database
 
 `packages/database` wraps [Drizzle Kit](https://orm.drizzle.team/kit-docs/overview):

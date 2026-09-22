@@ -179,6 +179,9 @@ catalogs:
     drizzle-orm:
       specifier: 1.0.0-rc.5-5935859
       version: 1.0.0-rc.5-5935859
+    genbumppush:
+      specifier: ^0.0.8
+      version: 0.0.8
     handlebars:
       specifier: ^4.7.9
       version: 4.7.9
@@ -209,9 +212,9 @@ importers:
       '@oxlint/plugins':
         specifier: ^1.83.0
         version: 1.83.0
-      changelogen:
-        specifier: ^0.6.2
-        version: 0.6.2(magicast@0.5.5)
+      genbumppush:
+        specifier: 'catalog:'
+        version: 0.0.8(chokidar@5.0.0)(dotenv@17.4.2)(giget@3.3.1)(jiti@2.7.0)(magicast@0.5.5)
       node:
         specifier: runtime:^26.0.0
         version: runtime:26.9.0
@@ -4418,6 +4421,11 @@ packages:
 
   fuzzysort@4.0.2:
     resolution: {integrity: sha512-3c7yD6rK1EXIsqpcu1ZVzXJugODWNMzvUij6yTiziaAHrpNS8kzFOI9mJLE8pmG4K9JOaVgzQRgklfOEk8f4Tg==}
+
+  genbumppush@0.0.8:
+    resolution: {integrity: sha512-Uocbmx2k2l/MDbWaYgU7cWgD7Kxo32lRbDNEIemYBKXFUMeb4zmxPQVRG/7l4mNE85CWJ5hvaqxZWL55nKu53Q==}
+    engines: {node: '>=20.19.0'}
+    hasBin: true
 
   generic-names@4.0.0:
     resolution: {integrity: sha512-ySFolZQfw9FoDb3ed9d80Cm9f0+r7qj+HJkWjeD9RBfpxEVTlVhol+gvaQB/78WbwYfbnNh8nWHHBSlg072y6A==}
@@ -10733,6 +10741,17 @@ snapshots:
   fuse.js@7.5.0: {}
 
   fuzzysort@4.0.2: {}
+
+  genbumppush@0.0.8(chokidar@5.0.0)(dotenv@17.4.2)(giget@3.3.1)(jiti@2.7.0)(magicast@0.5.5):
+    dependencies:
+      c12: 4.0.0-rc.1(chokidar@5.0.0)(dotenv@17.4.2)(giget@3.3.1)(jiti@2.7.0)(magicast@0.5.5)
+      changelogen: 0.6.2(magicast@0.5.5)
+    transitivePeerDependencies:
+      - chokidar
+      - dotenv
+      - giget
+      - jiti
+      - magicast
 
   generic-names@4.0.0:
     dependencies:

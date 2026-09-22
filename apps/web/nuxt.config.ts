@@ -15,6 +15,12 @@ export default defineNuxtConfig({
     typeCheck: true,
     strict: true,
   },
+  hooks: {
+    'prepare:types': ({ tsConfig }) => {
+      tsConfig.compilerOptions ??= {};
+      tsConfig.compilerOptions.rootDir = import.meta.dirname;
+    },
+  },
   app: {
     head: {
       title: 'Buildr',

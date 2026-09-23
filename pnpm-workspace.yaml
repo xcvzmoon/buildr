@@ -16,8 +16,8 @@ catalog:
   typescript: ^6.0.3
   uuid: ^14.0.2
   valibot: ^1.5.0
-  vite: npm:@voidzero-dev/vite-plus-core@0.3.3
-  vite-plus: 0.3.3
+  vite: npm:@voidzero-dev/vite-plus-core@1.0.0-rc.0
+  vite-plus: 1.0.0-rc.0
 
 catalogs:
   api:
@@ -54,7 +54,7 @@ catalogs:
 
 overrides:
   '@nuxt/cli': alpha
-  vite: 'catalog:'
+  vite@*: 'catalog:'
 
 peerDependencyRules:
   allowAny:
@@ -65,3 +65,15 @@ peerDependencyRules:
 allowBuilds:
   esbuild: true
   vue-demi: true
+
+minimumReleaseAgeExclude:
+  - '@voidzero-dev/vite-plus-core@1.0.0-rc.0'
+  - '@voidzero-dev/vite-plus-darwin-arm64@1.0.0-rc.0'
+  - '@voidzero-dev/vite-plus-darwin-x64@1.0.0-rc.0'
+  - '@voidzero-dev/vite-plus-linux-arm64-gnu@1.0.0-rc.0'
+  - '@voidzero-dev/vite-plus-linux-arm64-musl@1.0.0-rc.0'
+  - '@voidzero-dev/vite-plus-linux-x64-gnu@1.0.0-rc.0'
+  - '@voidzero-dev/vite-plus-linux-x64-musl@1.0.0-rc.0'
+  - '@voidzero-dev/vite-plus-win32-arm64-msvc@1.0.0-rc.0'
+  - '@voidzero-dev/vite-plus-win32-x64-msvc@1.0.0-rc.0'
+  - vite-plus@1.0.0-rc.0
